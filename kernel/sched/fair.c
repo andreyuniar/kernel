@@ -8145,7 +8145,7 @@ static inline struct cpumask *find_rtg_target(struct task_struct *p)
 static int find_energy_efficient_cpu(struct sched_domain *sd,
 				     struct task_struct *p,
 				     int cpu, int prev_cpu,
-				     int sync, bool sync_boost)
+				     int sync, int sibling_count_hint, bool sync_boost)
 {
 	int use_fbt = sched_feat(FIND_BEST_TARGET);
 	int cpu_iter, eas_cpu_idx = EAS_CPU_NXT;
@@ -8457,7 +8457,7 @@ pick_cpu:
 				      cpu >= cpu_rq(cpu)->rd->mid_cap_orig_cpu;
 
 			new_cpu = find_energy_efficient_cpu(energy_sd, p, cpu,
-						    prev_cpu, sync, sync_boost);
+					prev_cpu, sync, sibling_count_hint, sync_boost);
 		}
 
 		/* if we did an energy-aware placement and had no choices available
@@ -13141,8 +13141,7 @@ void check_for_migration(struct rq *rq, struct task_struct *p)
 
 		raw_spin_lock(&migration_lock);
 		rcu_read_lock();
-		new_cpu = find_energy_efficient_cpu(sd, p, cpu, prev_cpu,
-						    0, false);
+		new_cpu = find_energy_efficient_cpu(sd, p, cpu, prev_cpu, 0, 1, false);
 		rcu_read_unlock();
 		if ((new_cpu != -1) &&
 			(capacity_orig_of(new_cpu) > capacity_orig_of(cpu))) {
