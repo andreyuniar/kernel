@@ -6840,7 +6840,6 @@ int dsi_display_validate_mode_change(struct dsi_display *display,
 			dsi_panel_get_dfps_caps(display->panel, &dfps_caps);
 			if (cur_mode->timing.refresh_rate != adj_mode->timing.refresh_rate) {
 				WRITE_ONCE(cur_refresh_rate, adj_mode->timing.refresh_rate);
-				sched_set_refresh_rate(adj_mode->timing.refresh_rate);
 			}
 			if (dfps_caps.dfps_support ||
 			    dyn_clk_caps->maintain_const_fps) {
@@ -7768,7 +7767,7 @@ int dsi_display_pre_commit(void *display,
 
 unsigned int dsi_panel_get_refresh_rate(void)
 {
-	return unlikely(is_battery_saver_on()) ? 60 : READ_ONCE(cur_refresh_rate);
+	return READ_ONCE(cur_refresh_rate);
 }
 
 int dsi_display_enable(struct dsi_display *display)
@@ -7810,7 +7809,6 @@ int dsi_display_enable(struct dsi_display *display)
 
 	mode = display->panel->cur_mode;
 	WRITE_ONCE(cur_refresh_rate, mode->timing.refresh_rate);
-	sched_set_refresh_rate(mode->timing.refresh_rate);
 
 	if (mode->dsi_mode_flags & DSI_MODE_FLAG_DMS) {
 		rc = dsi_panel_switch(display->panel);
