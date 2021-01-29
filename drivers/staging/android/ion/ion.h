@@ -132,9 +132,10 @@ struct ion_buffer {
 	spinlock_t freelist_lock;
 	void *priv_virt;
 	void *vaddr;
-	struct sg_table *sg_table;
-	struct list_head attachments;
-	struct list_head vmas;
+	unsigned int flags;
+	unsigned int private_flags;
+	size_t size;
+	int kmap_refcount;
 	struct msm_iommu_data iommu_data;
 };
 
@@ -150,8 +151,7 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
 struct ion_device {
 	struct miscdevice dev;
 	struct plist_head heaps;
-	struct ion_heap_data *heap_data;
-	u32 heap_count;
+	struct rw_semaphore heap_rwsem;
 };
 
 /* refer to include/linux/pm.h */
@@ -274,7 +274,7 @@ struct ion_device *ion_device_create(struct ion_heap_data *heap_data);
  * @dev:		the device
  * @heap:		the heap to add
  */
-void ion_add_heap(struct ion_device *idev, struct ion_heap *heap);
+void ion_device_add_heap(struct ion_device *idev, struct ion_heap *heap);
 
 /**
  * some helpers for common operations on buffers using the sg_table
