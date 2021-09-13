@@ -4,9 +4,9 @@ export KERNELNAME=Excalibur
 
 export LOCALVERSION=
 
-export KBUILD_BUILD_USER=BuildBott
+export KBUILD_BUILD_USER=andrynr
 
-export KBUILD_BUILD_HOST=Nothing
+export KBUILD_BUILD_HOST=ClytheFreed
 
 export TOOLCHAIN=clang
 
