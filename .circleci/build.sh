@@ -70,7 +70,7 @@ function compile() {
 }
 # Zipping
 function zipping() {
-    cd anyKernel || exit 1
+    cd anykernel || exit 1
     zip -r9 Excalibur-Surya-${TANGGAL}.zip *
     cd ..
 }
