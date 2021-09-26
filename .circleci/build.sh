@@ -3,7 +3,7 @@ echo "Cloning dependencies"
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33.git -b master anykernel
 echo "Done"
-export TZ=Asia/Kolkata
+export TZ=Asia/Jakarta
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
 TANGGAL=$(date +"%F-%S")
