@@ -5,8 +5,8 @@ git clone --depth=1 https://github.com/andreyuniar/AnyKernel33.git -b master any
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
-TANGGAL=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
-START=$(TZ=Asia/Jakarta date +"%Y%m%d-%H%M")
+TANGGAL=$(date +"%F-%S")
+START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 PATH="${PWD}/clang/bin:$PATH"
 export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
@@ -21,7 +21,7 @@ function sendinfo() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Poco X3/X3 NFC</b> (surya/karna)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0AClocked at: <code>$(TZ=Asia/Jakarta date +%Y%m%d-%H%M)</code>%0A<b>Build Status:</b>#Stable"
+        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Poco X3/X3 NFC</b> (surya/karna)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0ABuild Date: <code>$(date +%d%m%Y)</code>%0A<b>Build Status:</b>#Stable"
 }
 # Push kernel to channel
 function push() {
