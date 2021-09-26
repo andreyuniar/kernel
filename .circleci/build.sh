@@ -48,7 +48,7 @@ function finerr() {
 }
 # Compile plox
 function compile() {
-    make O=out ARCH=arm64 surya_defconfig
+    make O=out ARCH=arm64 vendor/surya_defconfig
     make -j$(nproc --all) O=out \
                     ARCH=arm64 \
                     CC=clang \
