@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "Cloning dependencies"
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
-git clone --depth=1 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33 -b master AnyKernel
+git clone --depth=1 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33 -b master anykernel
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
@@ -13,6 +13,7 @@ export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head 
 export ARCH=arm64
 export KBUILD_BUILD_HOST=circleci
 export KBUILD_BUILD_USER="andreyuniar"
+export chat_id="-1001509763570"
 # sticker plox
 function sticker() {
     curl -s -X POST "https://api.telegram.org/bot$token/sendSticker" \
@@ -25,7 +26,7 @@ function sendinfo() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Xiaomi Redmi Note7/7S</b> (lavender)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b>#Stable"
+        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Poco X3/X3 NFC</b> (surya)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b>#Stable"
 }
 # Push kernel to channel
 function push() {
@@ -64,12 +65,12 @@ function compile() {
         finerr
         exit 1
     fi
-    cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
-    cp out/arch/arm64/boot/dtbo.img AnyKernel
+    cp out/arch/arm64/boot/Image.gz-dtb anykernel
+    cp out/arch/arm64/boot/dtbo.img anykernel
 }
 # Zipping
 function zipping() {
-    cd AnyKernel || exit 1
+    cd anyKernel || exit 1
     zip -r9 Excalibur-Surya-${TANGGAL}.zip *
     cd ..
 }
