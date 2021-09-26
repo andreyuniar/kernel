@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "Cloning dependencies"
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
-git clone --depth=1 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33 AnyKernel
+git clone --depth=1 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33 -b master AnyKernel
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 IMAGE=$(pwd)/out/arch/arm64/boot/dtbo.img
