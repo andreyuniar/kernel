@@ -21,7 +21,7 @@ function sendinfo() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Poco X3/X3 NFC</b> (surya/karna)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0ABuild Date: <code>$(date +%d%m%Y)</code>%0A<b>Build Status:</b>#Stable"
+        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Poco X3/X3 NFC</b> (surya/karna)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0ABuild Date: <code>$(date +%d/%m/%Y)</code>%0A<b>Build Status:</b>#Stable"
 }
 # Push kernel to channel
 function push() {
