@@ -14,6 +14,7 @@ export ARCH=arm64
 export KBUILD_BUILD_HOST=circleci
 export KBUILD_BUILD_USER="andreyuniar"
 export chat_id="-1001509763570"
+export bot token="1976690555:AAEaf0lu50HggtjndG4b4_clThP68hrEIpM"
 # sticker plox
 function sticker() {
     curl -s -X POST "https://api.telegram.org/bot$token/sendSticker" \
