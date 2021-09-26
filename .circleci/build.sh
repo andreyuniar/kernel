@@ -5,8 +5,8 @@ git clone --depth=1 https://github.com/andreyuniar/AnyKernel33.git -b master any
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
-TANGGAL=$(TZ=Asia/Jakarta date +"%F-%S")
-START=$(TZ=Asia/Jakarta date +"%s")
+DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
+BUILD_DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%H%M")
 KERNEL_DIR=$(pwd)
 PATH="${PWD}/clang/bin:$PATH"
 export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
