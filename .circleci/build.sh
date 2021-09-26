@@ -3,10 +3,11 @@ echo "Cloning dependencies"
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 git clone --depth=1 https://github.com/andreyuniar/AnyKernel33.git -b master anykernel
 echo "Done"
+export TZ=Asia/Kolkata
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
-DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
-BUILD_DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%H%M")
+TANGGAL=$(date +"%F-%S")
+START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 PATH="${PWD}/clang/bin:$PATH"
 export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
