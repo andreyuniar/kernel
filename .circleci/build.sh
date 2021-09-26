@@ -30,7 +30,7 @@ function sendinfo() {
 }
 # Push kernel to channel
 function push() {
-    cd AnyKernel
+    cd anykernel
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
         -F chat_id="$chat_id" \
