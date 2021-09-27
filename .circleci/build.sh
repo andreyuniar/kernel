@@ -21,7 +21,7 @@ function sendinfo() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0A<b>Device:</b> Surya%0A<b>Branch:</b> <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0A<b>Last commit:</b> <code>$(git log --pretty=format:'(%h)  %s' -1)</code>%0A<b>Compiler:</b> <code>${KBUILD_COMPILER_STRING}</code>%0A<b>Build Date:</b> <code>$(date +%d/%m/%Y)</code>%0A<b>Build Status:</b> Stable"
+        -d text="<b>• Excalibur Kernel •</b>%0ABuild started on <code>Circle CI</code>%0A<b>Device:</b> Surya%0A<b>Branch:</b> <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0A<b>Last commit:</b> <code>$(git log --pretty=format:'(%h) %s' -1)</code>%0A<b>Compiler:</b> <code>${KBUILD_COMPILER_STRING}</code>%0A<b>Build Date:</b> <code>$(date +%d/%m/%Y)</code>%0A<b>Build Status:</b> Stable"
 }
 # Push kernel to channel
 function push() {
