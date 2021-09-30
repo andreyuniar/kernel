@@ -2,14 +2,16 @@ version: 2.1
 jobs:
   compile:
    docker:
-      - image: z4nyx/docker:latest
+      - image: archlinux:base-devel
    steps:
       - run:
           command: |
+           pacman -Syu --needed --noconfirm wget base-devel xmlto inetutils bc cpio python-sphinx python-sphinx_rtd_theme graphviz imagemagick git python2 python zip xxd
+           git clone --depth=1 https://github.com/andreyuniar/kernel -b staging .
            git config --global user.name "andreyuniar"
-           git config --global user.email "andre.yuniar069@gmail.com"
+           git config --global user.email "andre.yuniar069@gmail.com@gmail.com"
            git config --global color.ui false
-           git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} .
+           curl -fsSL "https://repo.archlinuxcn.org/x86_64/glibc-linux4-2.33-4-x86_64.pkg.tar.zst" | bsdtar -C / -xvf -
            bash .circleci/build.sh
 workflows:
   version: 2.1
