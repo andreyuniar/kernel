@@ -2,15 +2,17 @@
 clone: 
   depth: 1
 kind: pipeline
-name: azrimPipeline
+name: XcalPipeline
 steps: 
   - 
-    environment: 
-      TG_TOKEN: 
-        from_secret: TOKEN
-      CHANNEL_ID:
-        from_secret: CHATID
     commands: 
-      - "bash build_script.sh"
-    image: azrim89/kernel:latest
-    name: Build
+      - "export token=$TOKEN"
+      - "curl https://raw.githubusercontent.com/andreyuniar/myscripts/master/new-base.sh | bash"
+    environment: 
+      TOKEN: 
+        from_secret: token
+    image: panchajanya1999/archlinux:latest
+    name: Xcal-Images
+    trigger: 
+      branch: 
+        - test
